@@ -20,5 +20,6 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/users', userRouter);
+// app.use('/boards', boardRouter);
 
 module.exports = app;
