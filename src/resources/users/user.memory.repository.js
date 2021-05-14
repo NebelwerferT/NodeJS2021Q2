@@ -16,7 +16,7 @@ const updateById = async (id, name) => {
 
 const deleteById =  async (id) => {
   const deletedUser = repo.filter(user => user.id === id)[0];
-  if (deletedUser !== undefined) {repo.slice(repo.indexOf(deletedUser), 1);}
+  if (deletedUser !== undefined) {repo.splice(repo.indexOf(deletedUser), 1);}
   return deletedUser;
 };
 

@@ -19,6 +19,7 @@ router.route('/:id')
   .get(async (req, res) => {
     const {id} = req.params;
     const user = await usersService.getById(id);
+    if (!user) {res.sendStatus(404);}
     delete user.password;
     res.status(200).json(user);
   })
@@ -33,7 +34,7 @@ router.route('/:id')
     const {id} = req.params;
     const deletedUser = await usersService.deleteById(id);
     if (deletedUser === undefined) {
-      res.status(404);
+      res.sendStatus(404);
     }
     else {
       await setUserIdToNull(deletedUser.id);
