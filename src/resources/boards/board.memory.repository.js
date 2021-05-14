@@ -24,7 +24,7 @@ const updateById = async (reqBody) => {
 
 const deleteById =  async (id) => {
   const deletedBorder = repo.filter(board => board.id === id)[0];
-  repo.slice(repo.indexOf(deletedBorder), 1);
+  if(deletedBorder !== undefined) {repo.splice(repo.indexOf(deletedBorder), 1);}
   return deletedBorder;
 };
 
