@@ -17,8 +17,8 @@ router.route('/:id')
   .get(async (req, res) => {
     const {id} = req.params;
     const board = await boardsService.getById(id);
-    if (!board) {res.sendStatus(404);}
-    res.status(200).json(board);
+    if (!board) {res.status(404).json(board);}
+    else {res.status(200).json(board);}
   })
   .put(async (req, res) => {
     const updatedBoard = await boardsService.updateById(req.body);
@@ -30,8 +30,8 @@ router.route('/:id')
     if (deletedBoard === undefined) {res.sendStatus(404);}
     else {
       await deleteBoardsTasks(deletedBoard.id);
+      res.status(200).json(deletedBoard);
     }
-    res.status(200).json(deletedBoard)
   });
 
 module.exports = router;
