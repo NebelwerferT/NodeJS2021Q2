@@ -17,12 +17,13 @@ router.route('/:id')
   .get(async (req, res) => {
     const {id} = req.params;
     const board = await boardsService.getById(id);
-    if (!board) {res.status(404).json(board);}
+    if (!board) {res.sendStatus(404);}
     else {res.status(200).json(board);}
   })
   .put(async (req, res) => {
     const updatedBoard = await boardsService.updateById(req.body);
-    res.status(200).json(updatedBoard);
+    if (!updatedBoard) {res.sendStatus(404);}
+    else {res.status(200).json(updatedBoard);}
   })
   .delete(async (req, res) => {
     const {id} = req.params;

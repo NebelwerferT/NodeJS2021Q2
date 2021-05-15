@@ -6,12 +6,14 @@ const getAll = async () => repo;
 
 const getById = async (id) => repo.filter(user => user.id === id)[0];
 
-const createUser = async () => repo[repo.push(new User()) - 1];
+const createUser = async (reqBody) => repo[repo.push(new User(reqBody)) - 1];
 
 const updateById = async (id, name) => {
-  const updatingUserIdx = repo.indexOf(repo.filter(user => user.id === id)[0]);
-  repo[updatingUserIdx].name = name;
-  return repo[updatingUserIdx];
+  const updatedUser = repo[repo.indexOf(repo.filter(user => user.id === id)[0])];
+  if (updatedUser !== undefined) {
+    updatedUser.name = name;
+  }
+  return updatedUser;
 };
 
 const deleteById =  async (id) => {

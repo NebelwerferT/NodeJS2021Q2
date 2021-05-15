@@ -10,7 +10,7 @@ router.route('/')
     res.status(200).json(users.map(User.toResponse));
   })
   .post(async (req, res) => {
-    const user = await usersService.createUser();
+    const user = await usersService.createUser(req.body);
     delete user.password;
     res.status(201).json(user);
   });
@@ -20,15 +20,20 @@ router.route('/:id')
     const {id} = req.params;
     const user = await usersService.getById(id);
     if (!user) {res.sendStatus(404);}
-    delete user.password;
-    res.status(200).json(user);
+    else {
+      delete user.password;
+      res.status(200).json(user);
+    }
   })
   .put(async (req, res) => {
     const {id} = req.params;
     const {name} = req.body;
     const updatedUser = await usersService.updateById(id, name);
-    delete updatedUser.password;
-    res.status(200).json(updatedUser);
+    if (!updatedUser) {res.sendStatus(404);}
+    else {
+      delete updatedUser.password;
+      res.status(200).json(updatedUser);
+    }
   })
   .delete(async (req, res) => {
     const {id} = req.params;

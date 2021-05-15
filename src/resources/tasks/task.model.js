@@ -3,9 +3,9 @@ const uuid = require('uuid');
 class Task {
   constructor({
     id = uuid.v4(),
-    title = "Test",
+    title = 'Test',
     order = 1,
-    description = null,
+    description = 'Desc',
     userId = null,
     boardId,
     columnId = null,
@@ -18,11 +18,6 @@ class Task {
     this.boardId = boardId;
     this.columnId = columnId;
   }
-
-//   static toResponse(user) {
-//     const { id, name, login } = user;
-//     return { id, name, login };
-//   }
 }
 
 module.exports = Task;

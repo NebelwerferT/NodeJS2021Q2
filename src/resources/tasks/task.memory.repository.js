@@ -1,17 +1,26 @@
 const Task = require("./task.model");
 
-const repo = [new Task(), new Task(), new Task(), new Task(), new Task(), new Task()];
+const repo = [
+  new Task({boardId: 'Test1'}),
+  new Task({boardId: 'Test1'}),
+  new Task({boardId: 'Test1'}),
+  new Task({boardId: 'Test2'}), 
+  new Task({boardId: 'Test1'}),
+  new Task({boardId: 'Test1'})
+];
 
-const getAll = async () => repo;
+const getAll = async (boardId) => repo.filter(task => task.boardId === boardId);
 
 const getById = async (id) => repo.filter(task => task.id === id)[0];
 
 const createTask = async (reqBody) => repo[repo.push(new Task(reqBody)) - 1]
 
 const updateById = async (reqBody) => {
-  const updatingTaskIdx = repo.indexOf(repo.filter(task => task.id === reqBody.id)[0]);
-  repo[updatingTaskIdx].title = reqBody.title;
-  return repo[updatingTaskIdx];
+  const updatedTask = repo[repo.indexOf(repo.filter(task => task.id === reqBody.id)[0])];
+  if (updatedTask !== undefined) {
+    updatedTask.title = reqBody.title;
+  }
+  return updatedTask;
 };
 
 const deleteById = async (id) => {

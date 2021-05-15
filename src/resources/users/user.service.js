@@ -2,7 +2,7 @@ const usersRepo = require('./user.memory.repository');
 
 const getAll = () => usersRepo.getAll();
 const getById = (id) => usersRepo.getById(id);
-const createUser = () => usersRepo.createUser();
+const createUser = (reqBody) => usersRepo.createUser(reqBody);
 const updateById = (id, name) => usersRepo.updateById(id, name);
 const deleteById = (id) => usersRepo.deleteById(id);
 
