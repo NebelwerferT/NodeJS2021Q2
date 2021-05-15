@@ -2,8 +2,6 @@ const router = require('express').Router();
 const User = require('./user.model');
 const usersService = require('./user.service');
 
-const {setUserIdToNull} = require('../tasks/task.service');
-
 router.route('/')
   .get(async (req, res) => {
     const users = await usersService.getAll();
@@ -38,13 +36,13 @@ router.route('/:id')
   .delete(async (req, res) => {
     const {id} = req.params;
     const deletedUser = await usersService.deleteById(id);
-    if (deletedUser === undefined) {
+    if (!deletedUser) {
       res.sendStatus(404);
     }
     else {
-      await setUserIdToNull(deletedUser.id);
+      delete deletedUser.password;
+      res.status(200).json(deletedUser);
     }
-    res.status(200).json(deletedUser);
   });
 
 module.exports = router;
