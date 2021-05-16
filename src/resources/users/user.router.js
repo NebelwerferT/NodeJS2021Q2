@@ -9,8 +9,7 @@ router.route('/')
   })
   .post(async (req, res) => {
     const user = await usersService.createUser(req.body);
-    delete user.password;
-    res.status(201).json(user);
+    res.status(201).json(User.toResponse(user));
   });
 
 router.route('/:id')
@@ -19,8 +18,7 @@ router.route('/:id')
     const user = await usersService.getById(id);
     if (!user) {res.sendStatus(404);}
     else {
-      delete user.password;
-      res.status(200).json(user);
+      res.status(200).json(User.toResponse(user));
     }
   })
   .put(async (req, res) => {
@@ -29,8 +27,7 @@ router.route('/:id')
     const updatedUser = await usersService.updateById(id, name);
     if (!updatedUser) {res.sendStatus(404);}
     else {
-      delete updatedUser.password;
-      res.status(200).json(updatedUser);
+      res.status(200).json(User.toResponse(updatedUser));
     }
   })
   .delete(async (req, res) => {
@@ -40,8 +37,7 @@ router.route('/:id')
       res.sendStatus(404);
     }
     else {
-      delete deletedUser.password;
-      res.status(200).json(deletedUser);
+      res.status(200).json(User.toResponse(deletedUser));
     }
   });
 
