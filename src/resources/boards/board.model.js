@@ -1,28 +1,27 @@
 const uuid = require('uuid');
-
-class Board { 
+const Column = require('./column.model');
+/**
+ * Class to create a Board object
+ * @class Board
+ */
+class Board {
+/**
+ * @type {Board}
+ * @param {Object} boardProps an object containing board properties
+ * @param {string} boardProps.id board id by uuid
+ * @param {string} boardProps.title board title
+ * @param {Array<Column>} boardProps.columns board columns
+ */
   constructor({
     id = uuid.v4(),
-    title = 'title',
-    columns = [],
+    title ,
+    columns = [new Column()],
   } = {}) {
     this.id = id;
     this.title = title;
-    this.columns = (columns.map(column => {
-      const columnWithId = {
-        id: uuid.v4(),
-        order: column.order,
-        title: column.title
-      }
-      return columnWithId;
-    }));
+    this.columns = columns
+    };
   }
 
-  addColumn(column) {
-    const cColumn = column;
-    cColumn.id = uuid.v4();
-    this.columns.push(cColumn);
-  }
-}
 
 module.exports = Board;
