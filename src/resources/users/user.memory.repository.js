@@ -1,23 +1,27 @@
+/**
+ * @module userRepo
+ */
+
 const User = require("./user.model");
 
 const repo = [new User(), new User(), new User(), new User(), new User(), new User()];
 
 /**
- * Get all users from the repository
+ * Gets all users from the repository
  * @returns {Promise<Array<User>>} a promise object representing an array of users
  */
 const getAll = async () => repo;
 
 /**
- * Get an user by id from the repository
+ * Gets an user by id from the repository
  * @param {string} id id of the requested user
  * @returns {Promise<User>} a promise object representing an user
  */
 const getById = async (id) => repo.filter(user => user.id === id)[0];
 
 /**
- * Create a new user in the repository
- * @param {object} reqBody an object from the request body with an user structure
+ * Creates a new user in the repository
+ * @param {Object} reqBody an object with an user structure
  * @returns {Promise<User>} a promise object representing a created user
  */
 const createUser = async (reqBody) => repo[repo.push(new User(reqBody)) - 1];
@@ -37,7 +41,7 @@ const updateById = async (id, name) => {
 };
 
 /**
- * Delete an user by id from the repository
+ * Deletes an user by id from the repository
  * @param {string} id id of the user to remove
  * @returns {Promise<User>} a promise object representing a deleted user
  */
