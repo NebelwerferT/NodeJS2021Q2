@@ -1,6 +1,12 @@
-const uuid = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
-const Column = require('./column.model');
+import {Column} from './column.model';
+
+export interface IBoard {
+  id: string;
+  title: string;
+  columns: Column[]
+}
 /**
  * @module boardModel
  */
@@ -19,7 +25,10 @@ const Column = require('./column.model');
 /**
  * Class to create a Board object
  */
-class Board {
+class Board implements IBoard {
+  id: string;
+  title: string;
+  columns: Column[];
 /**
  * @type {Board}
  * @param {Object} boardProps an object containing board properties
@@ -28,9 +37,9 @@ class Board {
  * @param {Array<Column>} boardProps.columns board columns
  */
   constructor({
-    id = uuid.v4(),
+    id = uuidv4(),
     title = "title",
-    columns = [new Column()],
+    columns = [new Column({})],
   } = {}) {
     this.id = id;
     this.title = title;
@@ -39,4 +48,4 @@ class Board {
   }
 
 
-module.exports = Board;
+export {Board};

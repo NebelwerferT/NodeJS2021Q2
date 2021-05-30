@@ -1,16 +1,16 @@
+import * as boardsRepo from './board.memory.repository';
+import { deleteBoardsTasks } from '../tasks/task.service';
+import { IBoard } from './board.model';
 /**
  * @module boardService
  */
-
-const boardsRepo = require('./board.memory.repository');
-const {deleteBoardsTasks} = require('../tasks/task.service');
 
 /**
  * Calls repository to get all boards
  * @returns {Promise<Array<Board>>} a promise object representing an array of boards
  * {@link module:boardRepo}
  */
-const getAll = () => boardsRepo.getAll();
+const getAll = (): Promise<IBoard[]> => boardsRepo.getAll();
 
 /**
  * Calls repository to get a board by id
@@ -18,7 +18,7 @@ const getAll = () => boardsRepo.getAll();
  * @returns {Promise<Board>} a promise object representing a board
  * {@link module:boardRepo}
  */
-const getById = (id) => boardsRepo.getById(id);
+const getById = (id: string): Promise<IBoard | undefined> => boardsRepo.getById(id);
 
 /**
  * Calls repository to create a new board
@@ -26,7 +26,7 @@ const getById = (id) => boardsRepo.getById(id);
  * @returns {Promise<Board>} a promise object representing a created board
  * {@link module:boardRepo}
  */
-const createBoard = (reqBody) => boardsRepo.createBoard(reqBody);
+const createBoard = (reqBody: IBoard): Promise<IBoard> => boardsRepo.createBoard(reqBody);
 
 /**
  * Calls repository to send data according to which the board with the specified id will be updated
@@ -34,7 +34,7 @@ const createBoard = (reqBody) => boardsRepo.createBoard(reqBody);
  * @returns {Promise<Board>} a promise object representing an updated board
  * {@link module:boardRepo}
  */
-const updateById = (reqBody) => boardsRepo.updateById(reqBody);
+const updateById = (reqBody: IBoard): Promise<IBoard|undefined> => boardsRepo.updateById(reqBody);
 
 /**
  * Calls repository to delete a board by id
@@ -43,10 +43,10 @@ const updateById = (reqBody) => boardsRepo.updateById(reqBody);
  * {@link module:boardRepo}
  * {@link module:taskService}
  */
-const deleteById = async (id) => {
+const deleteById = async (id: string): Promise<IBoard | undefined> => {
     const deletedBorder = await boardsRepo.deleteById(id);
-    if (deletedBorder) {await deleteBoardsTasks(deletedBorder.id);}
+    if (deletedBorder) { await deleteBoardsTasks(deletedBorder.id); }
     return deletedBorder;
 }
 
-module.exports = { getAll, getById, createBoard, updateById, deleteById };
+export { getAll, getById, createBoard, updateById, deleteById };

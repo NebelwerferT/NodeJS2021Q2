@@ -1,30 +1,34 @@
+import {Board, IBoard} from "./board.model";
+
 /**
  * @module boardRepo
  */
 
-const Board = require("./board.model");
-
-const repo = [];
+const repo: IBoard[] = [];
 
 /**
  * Gets all boards from the repository
  * @returns {Promise<Array<Board>>} a promise object representing an array of boards
  */
-const getAll = async () => repo;
+const getAll = async (): Promise<IBoard[]> => repo;
 
 /**
  * Gets a board by id from the repository
  * @param {string} id id of the requested board
  * @returns {Promise<Board>} a promise object representing a board
  */
-const getById = async (id) => repo.filter(board => board.id === id)[0]
+const getById = async (id: string): Promise<IBoard|undefined> => repo.find(board => board.id === id)
 
 /**
  * Creates a new board in the repository
  * @param {Object} reqBody an object with a board structure
  * @returns {Promise<Board>} a promise object representing a created board
  */
-const createBoard = async (reqBody) => repo[(repo.push(new Board(reqBody))) - 1];
+const createBoard = async (reqBody: IBoard): Promise<IBoard> => {
+  const newBoard = new Board(reqBody);
+  repo.push(newBoard);
+  return newBoard;
+};
 
 
 /**
@@ -32,8 +36,8 @@ const createBoard = async (reqBody) => repo[(repo.push(new Board(reqBody))) - 1]
  * @param {Object} reqBody an object with a board structure
  * @returns {Promise<Board>} a promise object representing an updated board
  */
-const updateById = async (reqBody) => {
-  const updatedBoard = repo[repo.indexOf(repo.filter(board => board.id === reqBody.id)[0])];
+const updateById = async (reqBody: IBoard): Promise<IBoard|undefined> => {
+  const updatedBoard = repo.find(board => board.id === reqBody.id);
   if (updatedBoard !== undefined) {
     updatedBoard.title = reqBody.title;
     updatedBoard.columns = reqBody.columns;
@@ -46,10 +50,10 @@ const updateById = async (reqBody) => {
  * @param {string} id id of the board to remove
  * @returns {Promise<Board>} a promise object representing an deleted board
  */
-const deleteById =  async (id) => {
-  const deletedBorder = repo.filter(board => board.id === id)[0];
+const deleteById =  async (id: string): Promise<IBoard|undefined> => {
+  const deletedBorder = repo.find(board => board.id === id);;
   if(deletedBorder !== undefined) {repo.splice(repo.indexOf(deletedBorder), 1);}
   return deletedBorder;
 };
 
-module.exports = { getAll, getById, createBoard, updateById, deleteById };
+export { getAll, getById, createBoard, updateById, deleteById };
