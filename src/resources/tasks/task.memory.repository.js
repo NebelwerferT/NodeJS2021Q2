@@ -4,14 +4,7 @@
 
 const Task = require("./task.model");
 
-const repo = [
-  new Task({boardId: 'Test1'}),
-  new Task({boardId: 'Test1'}),
-  new Task({boardId: 'Test1'}),
-  new Task({boardId: 'Test2'}), 
-  new Task({boardId: 'Test1'}),
-  new Task({boardId: 'Test1'})
-];
+const repo = [];
 
 /**
  * Gets all tasks by board id from the repository

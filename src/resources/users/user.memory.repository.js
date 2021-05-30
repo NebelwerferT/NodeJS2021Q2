@@ -4,7 +4,7 @@
 
 const User = require("./user.model");
 
-const repo = [new User(), new User(), new User(), new User(), new User(), new User()];
+const repo = [];
 
 /**
  * Gets all users from the repository

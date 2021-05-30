@@ -4,14 +4,7 @@
 
 const Board = require("./board.model");
 
-const repo = [
-  new Board({id: 'Test1', title: 'Test1', columns: []}),
-  new Board({id: undefined, title: 'Test', columns: []}),
-  new Board({id: undefined, title: 'Test', columns: []}),
-  new Board({id: undefined, title: 'Test', columns: []}),
-  new Board({id: 'Test2', title: 'Test2', columns: []}),
-  new Board({id: undefined, title: 'Test', columns: []})
-];
+const repo = [];
 
 /**
  * Gets all boards from the repository
