@@ -1,11 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express';
-const swaggerUI = require('swagger-ui-express');
-const path = require('path');
-const YAML = require('yamljs');
-const {access, constants} = require("fs");
-const userRouter = require('./resources/users/user.router');
-const boardRouter = require('./resources/boards/board.router');
-const taskRouter = require('./resources/tasks/task.router');
+import swaggerUI from 'swagger-ui-express';
+import path from 'path';
+import YAML from 'yamljs';;
+import { access, constants } from "fs";
+import { router as userRouter } from './resources/users/user.router';
+import { router as boardRouter } from './resources/boards/board.router';
+import { router as taskRouter } from './resources/tasks/task.router';
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/docs', (req: Request, res: Response, next: NextFunction) => {
-  access(`${__dirname  }/../out/index.html`, constants.R_OK, (err: ErrorEvent) => {
+  access(`${__dirname}/../out/index.html`, constants.R_OK, (err) => {
     if (err) {
       res.status(404).send("Not Found. Try to execute the npm run doc script through the terminal in the project directory.");
     }
@@ -24,7 +24,7 @@ app.use('/docs', (req: Request, res: Response, next: NextFunction) => {
     }
   });
 });
-app.use('/docs', express.static(`${__dirname  }/../out/`))
+app.use('/docs', express.static(`${__dirname}/../out/`))
 
 app.use('/', (req: Request, res: Response, next: NextFunction) => {
   if (req.originalUrl === '/') {
@@ -38,4 +38,4 @@ app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards', taskRouter);
 
-module.exports = app;
+export { app };
