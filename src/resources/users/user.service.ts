@@ -1,16 +1,16 @@
 /**
  * @module userService
  */
-
-const usersRepo = require('./user.memory.repository');
-const {setUserIdToNull} = require('../tasks/task.service');
+import { IUser } from './user.model';
+import * as usersRepo from './user.memory.repository';
+import { setUserIdToNull } from '../tasks/task.service';
 
 /**
  * Calls repository to get all users
  * @returns {Promise<Array<User>>} a promise object representing an array of users
  * {@link module:userRepo}
  */
-const getAll = () => usersRepo.getAll();
+const getAll = (): Promise<IUser[]> => usersRepo.getAll();
 
 /**
  * Calls repository to get a user by id
@@ -18,7 +18,7 @@ const getAll = () => usersRepo.getAll();
  * @returns {Promise<User>} a promise object representing a user
  * {@link module:userRepo}
  */
-const getById = (id) => usersRepo.getById(id);
+const getById = (id: string): Promise<IUser | undefined> => usersRepo.getById(id);
 
 /**
  * Calls repository to create a new user
@@ -26,7 +26,7 @@ const getById = (id) => usersRepo.getById(id);
  * @returns {Promise<User>} a promise object representing a created user
  * {@link module:userRepo}
  */
-const createUser = (reqBody) => usersRepo.createUser(reqBody);
+const createUser = (reqBody: IUser): Promise<IUser> => usersRepo.createUser(reqBody);
 
 /**
  * Calls repository to send data according to which the user with the specified id will be updated
@@ -35,7 +35,7 @@ const createUser = (reqBody) => usersRepo.createUser(reqBody);
  * @returns {Promise<User>} a promise object representing an updated user
  * {@link module:userRepo}
  */
-const updateById = (id, name) => usersRepo.updateById(id, name);
+const updateById = (id: string, name: string): Promise<IUser | undefined> => usersRepo.updateById(id, name);
 
 /**
  * Calls repository to delete a user by id
@@ -44,10 +44,10 @@ const updateById = (id, name) => usersRepo.updateById(id, name);
  * {@link module:userRepo}
  * {@link module:taskService}
  */
-const deleteById = async (id) => {
-    const deletedUser = await usersRepo.deleteById(id);
-    if (deletedUser) {await setUserIdToNull(deletedUser.id);}
+const deleteById = async (id: string): Promise<IUser | undefined> => {
+    const deletedUser: IUser | undefined = await usersRepo.deleteById(id);
+    if (deletedUser) { await setUserIdToNull(deletedUser.id); }
     return deletedUser;
 }
 
-module.exports = { getAll, getById, createUser, updateById, deleteById };
+export { getAll, getById, createUser, updateById, deleteById };
