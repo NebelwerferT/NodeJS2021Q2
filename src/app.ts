@@ -1,4 +1,4 @@
-const express = require('express');
+import express, { Request, Response, NextFunction } from 'express';
 const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
@@ -14,8 +14,8 @@ app.use(express.json());
 
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-app.use('/docs', (req, res, next) => {
-  access(`${__dirname  }/../out/index.html`, constants.R_OK, (err) => {
+app.use('/docs', (req: Request, res: Response, next: NextFunction) => {
+  access(`${__dirname  }/../out/index.html`, constants.R_OK, (err: ErrorEvent) => {
     if (err) {
       res.status(404).send("Not Found. Try to execute the npm run doc script through the terminal in the project directory.");
     }
@@ -26,7 +26,7 @@ app.use('/docs', (req, res, next) => {
 });
 app.use('/docs', express.static(`${__dirname  }/../out/`))
 
-app.use('/', (req, res, next) => {
+app.use('/', (req: Request, res: Response, next: NextFunction) => {
   if (req.originalUrl === '/') {
     res.send('Service is running!');
     return;
