@@ -27,6 +27,9 @@ After starting the app on port (4000 as default) you can open
 in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
+Code documentation is also available to you. To access it, go to http://localhost:4000/docs/.
+For this first you need to execute the npm run doc script through the terminal in the project directory.
+
 ## Testing
 
 After application running open new terminal and enter:
