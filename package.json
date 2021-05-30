@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "cross-env": "7.0.3",
+    "docdash": "^1.2.0",
     "dotenv": "9.0.0",
     "express": "4.17.1",
     "swagger-ui-express": "4.1.6",
