@@ -1,6 +1,6 @@
-const { PORT } = require('./common/config');
-const server = require('./app');
+import { PORT } from './common/config';
+import {app} from './app';
 
-server.listen(PORT, () =>
+app.listen(PORT, () =>
   console.log(`App is running on http://localhost:${PORT}`)
 );
