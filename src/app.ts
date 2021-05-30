@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-app.use('/docs', (req: Request, res: Response, next: NextFunction) => {
+app.use('/docs', (_req: Request, res: Response, next: NextFunction) => {
   access(`${__dirname}/../out/index.html`, constants.R_OK, (err) => {
     if (err) {
       res.status(404).send("Not Found. Try to execute the npm run doc script through the terminal in the project directory.");
