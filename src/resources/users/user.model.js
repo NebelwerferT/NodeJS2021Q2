@@ -1,8 +1,21 @@
 const uuid = require('uuid');
-
+/**
+ * @module userModel
+ */
+/**
+ * User instance type
+ * @typedef {Object} User
+ * @property {string} id user id
+ * @property {string} name user name
+ * @property {string} login user login
+ * @property {string} password user password
+ */
+/**
+ * @module userConstructor
+ * @ignore
+ */
 /**
  * Class to create a User object
- * @class User
  */
 class User {
 /**

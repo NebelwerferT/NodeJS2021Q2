@@ -1,8 +1,23 @@
 const uuid = require('uuid');
+
 const Column = require('./column.model');
 /**
+ * @module boardModel
+ */
+/**
+ * Board instance type
+ * @typedef {Object} Board
+ * @property {String} id board id
+ * @property {String} title board title
+ * @property {Array<Column>} columns an array of сolumn instances
+ */
+
+/**
+ * @module boardConstructor
+ * @ignore
+ */
+/**
  * Class to create a Board object
- * @class Board
  */
 class Board {
 /**
@@ -14,7 +29,7 @@ class Board {
  */
   constructor({
     id = uuid.v4(),
-    title ,
+    title = "title",
     columns = [new Column()],
   } = {}) {
     this.id = id;

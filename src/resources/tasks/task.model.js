@@ -1,8 +1,24 @@
 const uuid = require('uuid');
-
+/**
+ * @module taskModel
+ */
+/**
+ * Task instance type
+ * @typedef {Object} Task
+ * @property {string} id task id 
+ * @property {string} title task title
+ * @property {Number} order task order
+ * @property {string} description task description
+ * @property {string|null} userId user id for this task
+ * @property {string} boardId board ID for this task
+ * @property {string|null} columnId column ID for this task
+ */
+/**
+ * @module taskConstructor
+ * @ignore
+ */
 /**
  * Class to create a Task object
- * @class Task
  */
 class Task {
 /**

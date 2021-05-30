@@ -1,8 +1,21 @@
 const uuid = require('uuid');
-
+/**
+ * @module boardModel
+ * @ignore
+ */
+/**
+ * Column instance type
+ * @typedef {Object} Column
+ * @property {String} id board id
+ * @property {String} title board title
+ * @property {Number} order column order
+ */
+/**
+ * @module columnConstructor
+ * @ignore
+ */
 /**
  * Class to create a Column object
- * @class Column
  */
  class Column {
    /**
