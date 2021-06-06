@@ -23,7 +23,7 @@ const errLogger = (err: LogErr, req: Request, res: Response, next: NextFunction)
         error: errLog.msg
     });
     res.on('finish', () => transport.error(errLog));
-    next(err);
+    next();
 };
 
 const uncaughtException = process.on('uncaughtException', (err: Error) => {
