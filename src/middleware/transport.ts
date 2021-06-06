@@ -28,8 +28,6 @@ export const transport = {
             `Date: ${errLog.date}
             Method: ${errLog.reqres.req.method} 
             URL: ${errLog.reqres.req.url} 
-            Query Params: ${JSON.stringify(errLog.reqres.req.params)} 
-            Body: ${JSON.stringify(errLog.reqres.req.body)} 
             Status: ${errLog.statusCode} 
             Message: ${errLog.msg}\n`);
     },
