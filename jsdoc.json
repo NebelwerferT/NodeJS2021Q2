@@ -1,22 +1,24 @@
 {
-    "source": {
-      "include": ["src"],
-      "includePattern": ".js$",
-      "excludePattern": "(node_modules/|out/)"
-    },
-    "compilerOptions": {
-      "checkJs": true
-    },
-    "plugins": [
-      "plugins/markdown"
+  "source": {
+    "include": [
+      "build"
     ],
-    "templates": {
-      "cleverLinks": true,
-      "monospaceLinks": true
-    },
-    "opts": {
-      "recurse": true,
-      "readme": "./README.md",
-      "template": "node_modules/docdash"
-    }
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|out/)"
+  },
+  "compilerOptions": {
+    "checkJs": true
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  },
+  "opts": {
+    "recurse": true,
+    "readme": "./README.md",
+    "template": "node_modules/docdash"
   }
+}
