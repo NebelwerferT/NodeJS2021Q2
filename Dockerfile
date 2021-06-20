@@ -4,4 +4,6 @@ COPY package*.json .
 RUN npm install
 COPY . .
 EXPOSE ${PORT}
-CMD ["npm", "run", "dev"]
+RUN ls
+RUN ls /usr/app/
+CMD ["npm", "start"]
