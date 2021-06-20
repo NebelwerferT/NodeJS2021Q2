@@ -2,7 +2,7 @@
  * @module taskService
  */
 
-import { ITask } from "./task.model";
+import { Task } from "../../entities/task.model";
 
 import * as tasksRepo from './task.memory.repository';
 
@@ -13,7 +13,7 @@ import * as tasksRepo from './task.memory.repository';
  * @returns {Promise<Array<Task>>} a promise object representing an array of tasks
  * {@link module:taskRepo}
  */
-const getAll = (boardId: string): Promise<ITask[]> => tasksRepo.getAll(boardId);
+const getAll = (boardId: string): Promise<Task[]> => tasksRepo.getAll(boardId);
 
 /**
  * Calls repository to get a task by id
@@ -21,7 +21,7 @@ const getAll = (boardId: string): Promise<ITask[]> => tasksRepo.getAll(boardId);
  * @returns {Promise<Task>} a promise object representing a task
  * {@link module:taskRepo}
  */
-const getById = (id: string): Promise<ITask | undefined> => tasksRepo.getById(id);
+const getById = (id: string): Promise<Task | undefined> => tasksRepo.getById(id);
 
 /**
  * Calls repository to create a new task
@@ -29,7 +29,7 @@ const getById = (id: string): Promise<ITask | undefined> => tasksRepo.getById(id
  * @returns {Promise<Task>} a promise object representing a created task
  * {@link module:taskRepo}
  */
-const createTask = (reqBody: ITask): Promise<ITask> => tasksRepo.createTask(reqBody);
+const createTask = (reqBody: Task): Promise<Task> => tasksRepo.createTask(reqBody);
 
 /**
  * Calls repository to send data according to which the task with the specified id will be updated
@@ -37,7 +37,7 @@ const createTask = (reqBody: ITask): Promise<ITask> => tasksRepo.createTask(reqB
  * @returns {Promise<Task>} a promise object representing an updated task
  * {@link module:taskRepo}
  */
-const updateById = (reqBody: ITask): Promise<ITask | undefined> => tasksRepo.updateById(reqBody);
+const updateById = (reqBody: Task): Promise<Task | undefined> => tasksRepo.updateById(reqBody);
 
 /**
  * Calls repository to delete a task by id
@@ -45,7 +45,7 @@ const updateById = (reqBody: ITask): Promise<ITask | undefined> => tasksRepo.upd
  * @returns {Promise<Task>} a promise object representing an deleted task
  * {@link module:taskRepo}
  */
-const deleteById = (id: string): Promise<ITask | undefined> => tasksRepo.deleteById(id);
+const deleteById = (id: string): Promise<Task | undefined> => tasksRepo.deleteById(id);
 
 /**
  * Calls repository to update the task ID to set the user id field to null

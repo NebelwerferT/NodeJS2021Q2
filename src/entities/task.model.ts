@@ -1,14 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export interface ITask {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string | null;
-  boardId: string | null;
-  columnId: string | null;
-}
 /**
  * @module taskModel
  */
@@ -30,19 +21,21 @@ export interface ITask {
 /**
  * Class to create a Task object
  */
-class Task implements ITask {
+@Entity({ name: 'task' })
+export class Task {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-
+  @Column({ type: 'varchar', length: 255 })
   title: string;
-
+  @Column()
   order: number;
-
+  @Column({ type: 'varchar', length: 255 })
   description: string;
-
-  userId: string | null;
-
+  @Column({ type: 'varchar', nullable: true, length: 255 })
+  userId!: string | null;
+  @Column({ type: 'varchar', nullable: true, length: 255 })
   boardId: string | null;
-
+  @Column({ type: 'varchar', nullable: true, length: 255 })
   columnId: string | null;
 
   /**
@@ -56,23 +49,4 @@ class Task implements ITask {
    * @param {string|null} taskProps.boardId board ID for this task instance
    * @param {string|null} taskProps.columnId column ID for this task instance
    */
-  constructor({
-    id = uuidv4(),
-    title = 'Test',
-    order = 1,
-    description = 'Desc',
-    userId = "userId",
-    boardId = "boardId",
-    columnId = "columnId",
-  }: ITask) {
-    this.id = id;
-    this.title = title;
-    this.order = order;
-    this.description = description;
-    this.userId = userId;
-    this.boardId = boardId;
-    this.columnId = columnId;
-  }
 }
-
-export { Task };

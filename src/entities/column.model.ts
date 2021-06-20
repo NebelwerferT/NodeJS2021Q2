@@ -1,10 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Board } from './board.model';
 
-export interface IColumn {
-  id: string;
-  title: string;
-  order: number;
-}
 /**
  * @module boardModel
  * @ignore
@@ -23,12 +19,22 @@ export interface IColumn {
 /**
  * Class to create a Column object
  */
-class Column implements IColumn {
+@Entity({ name: 'column' })
+export class Columns {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar', length: 255 })
   title: string;
 
+  @Column('integer')
   order: number;
+
+  @ManyToOne(() => Board, { onDelete: 'CASCADE' })
+  board: Board;
+
+  @Column('uuid')
+  boardId: string;
 
   /**
    * Creates a column instance
@@ -38,15 +44,4 @@ class Column implements IColumn {
    * @param {String} columnProps.title column title
    * @param {Number} columnProps.order order of column on the board
    */
-  constructor({
-    id = uuidv4(),
-    title = 'Column Title',
-    order = 0
-  } = {}) {
-    this.id = id;
-    this.title = title;
-    this.order = order;
-  }
 }
-
-export { Column };
