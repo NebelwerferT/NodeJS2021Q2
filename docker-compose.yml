@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+    node:
+        build: .
+        networks:
+            - nebelwerfert
+        depends_on:
+            - postgres
+        ports:
+            - ${PORT}:${PORT}
+        environment:
+            PORT: ${PORT}
+        volumes:
+            - ./logs:/usr/app/logs
+        restart: on-failure
+
+    postgres:
+        build: ./db/
+        networks:
+            - nebelwerfert
+        ports:
+            - ${POSTGRES_PORT}:${POSTGRES_PORT}
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data/
+        restart: on-failure
+
+networks:
+    nebelwerfert:
+        driver: bridge
+
+volumes:
+    pgdata:
+    logs:

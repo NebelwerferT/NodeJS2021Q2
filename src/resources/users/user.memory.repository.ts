@@ -32,10 +32,10 @@ const createUser = async (reqBody: IUser): Promise<IUser> => {
  * Sends data according to which the user with the specified id will be updated.
  * @param {string} id id of the user to update
  * @param {string} name new name value for the user being updated
- * @returns {Promise<User>} a promise object representing an updated user
+ * @returns {Promise<User | undefined>} a promise object representing an updated user
  */
 const updateById = async (id: string, name: string): Promise<IUser | undefined> => {
-  const updatedUser = repo.find(user => user.id === id);;
+  const updatedUser = repo.find(user => user.id === id);
   if (updatedUser !== undefined) {
     updatedUser.name = name;
   }
@@ -45,9 +45,9 @@ const updateById = async (id: string, name: string): Promise<IUser | undefined> 
 /**
  * Deletes an user by id from the repository
  * @param {string} id id of the user to remove
- * @returns {Promise<User>} a promise object representing a deleted user
+ * @returns {Promise<User | undefined>} a promise object representing a deleted user
  */
-const deleteById = async (id: String) => {
+const deleteById = async (id: string): Promise<IUser | undefined> => {
   const deletedUser = repo.filter(user => user.id === id)[0];
   if (deletedUser !== undefined) { repo.splice(repo.indexOf(deletedUser), 1); }
   return deletedUser;

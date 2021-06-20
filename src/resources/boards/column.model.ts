@@ -25,8 +25,11 @@ export interface IColumn {
  */
 class Column implements IColumn {
   id: string;
+
   title: string;
+
   order: number;
+
   /**
    * Creates a column instance
    * @type {Column}

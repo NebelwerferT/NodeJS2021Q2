@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { transport } from './transport';
 import { LogErr, UnexpErr } from "./interfaces";
 
-const reqLogger = (req: Request, res: Response, next: NextFunction) => {
+const reqLogger = (req: Request, res: Response, next: NextFunction): void => {
     const date = new Date();
     const start = Date.now();
     next();
@@ -14,7 +14,7 @@ const reqLogger = (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
-const errLogger = (err: LogErr, req: Request, res: Response, next: NextFunction) => {
+const errLogger = (err: LogErr, req: Request, res: Response, next: NextFunction): void => {
     const date = new Date();
     const reqres = { req, res };
     const errLog = new LogErr(reqres, err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR, err.msg, err.stack, date);

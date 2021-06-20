@@ -51,7 +51,7 @@ const updateById = async (reqBody: IBoard): Promise<IBoard|undefined> => {
  * @returns {Promise<Board>} a promise object representing an deleted board
  */
 const deleteById =  async (id: string): Promise<IBoard|undefined> => {
-  const deletedBorder = repo.find(board => board.id === id);;
+  const deletedBorder = repo.find(board => board.id === id);
   if(deletedBorder !== undefined) {repo.splice(repo.indexOf(deletedBorder), 1);}
   return deletedBorder;
 };

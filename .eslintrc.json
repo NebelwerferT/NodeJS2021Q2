@@ -18,6 +18,33 @@
       "impliedStrict": true
     }
   },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "airbnb-base",
+    "prettier"
+  ],
+  "rules": {
+    "import/extensions": "off",
+    "linebreak-style": "off",
+    "dot-notation": "off",
+    "node/no-unsupported-features/es-syntax": "off",
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
+    "max-classes-per-file": "off",
+    "node/no-missing-import": [
+      "error",
+      {
+        "allowModules": [],
+        "resolvePaths": [],
+        "tryExtensions": [
+          ".js",
+          ".ts"
+        ]
+      }
+    ]
+  },
   "settings": {
     "noInlineConfig": true,
     "import/resolver": {
@@ -27,19 +54,6 @@
           ".ts"
         ]
       }
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:node/recommended",
-      "airbnb-base",
-      "prettier"
-    ],
-    "rules": {
-      "import/extensions": "off",
-      "linebreak-style": "off",
-      "node/no-unsupported-features/es-syntax": "off",
-      "no-underscore-dangle": "off",
-      "import/prefer-default-export": "off"
     }
   }
 }

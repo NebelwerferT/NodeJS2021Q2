@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+
 export interface ITask {
   id: string;
   title: string;
@@ -31,12 +32,19 @@ export interface ITask {
  */
 class Task implements ITask {
   id: string;
+
   title: string;
+
   order: number;
+
   description: string;
+
   userId: string | null;
+
   boardId: string | null;
+
   columnId: string | null;
+
   /**
    * @type {Task}
    * @param {Object} taskProps an object containing task properties

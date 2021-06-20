@@ -1,10 +1,10 @@
-import { Response, Request, NextFunction } from 'express';
+import { Router, Response, Request, NextFunction } from 'express';
+import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import { User } from './user.model';
 import * as usersService from './user.service';
-import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import { LogErr } from '../../middleware/interfaces';
 
-const router = require("express").Router();
+const router = Router();
 
 router.route('/')
   .get(async (_req: Request, res: Response) => {

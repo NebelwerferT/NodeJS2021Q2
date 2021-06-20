@@ -12,7 +12,7 @@ const reqLogStream = fs.createWriteStream(REQ_LOG, { flags: "a" });
 const errLogStream = fs.createWriteStream(ERR_LOG, { flags: 'a' });
 
 export const transport = {
-    request: ({ date, req, res, time }: ILogInfo) => {
+    request: ({ date, req, res, time }: ILogInfo): void => {
         reqLogStream.write(
             `Date: ${date} 
             Method: ${req.method} 
@@ -23,7 +23,7 @@ export const transport = {
             Time: [${time} ms]\n`
         );
     },
-    error: (errLog: ILogErr) => {
+    error: (errLog: ILogErr): void => {
         errLogStream.write(
             `Date: ${errLog.date}
             Method: ${errLog.reqres.req.method} 
@@ -31,7 +31,7 @@ export const transport = {
             Status: ${errLog.statusCode} 
             Message: ${errLog.msg}\n`);
     },
-    unexp: (unexpErr: IUnexpErr) => {
+    unexp: (unexpErr: IUnexpErr): void => {
         fs.appendFileSync(UNP_LOG,
             `Date: ${unexpErr.date} 
             Status: ${unexpErr.statusCode} 
