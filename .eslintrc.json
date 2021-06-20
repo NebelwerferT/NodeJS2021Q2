@@ -32,6 +32,8 @@
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
+    "no-return-await": "off",
+    "class-methods-use-this": "off",
     "max-classes-per-file": "off",
     "node/no-missing-import": [
       "error",
