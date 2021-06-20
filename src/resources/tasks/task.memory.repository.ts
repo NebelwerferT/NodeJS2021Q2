@@ -50,7 +50,7 @@ const updateById = async (reqBody: ITask): Promise<ITask | undefined> => {
  * @returns {Promise<Task>} a promise object representing a deleted task
  */
 const deleteById = async (id: string): Promise<ITask | undefined> => {
-  const deletedTask = repo.find(task => task.id === id);;
+  const deletedTask = repo.find(task => task.id === id);
   if (deletedTask !== undefined) { repo.splice(repo.indexOf(deletedTask), 1); }
   return deletedTask;
 };
@@ -76,7 +76,7 @@ const setUserIdToNull = async (deletedUserId: string): Promise<void> => {
  * @param {string} deletedBoardId id of the deleted board
  * @returns {Promise<void>} no return required
  */
-const deleteBoardsTasks = async (deletedBoardId: string) => {
+const deleteBoardsTasks = async (deletedBoardId: string): Promise<void> => {
   const deletedTasks = repo.filter(task => task.boardId === deletedBoardId);
   deletedTasks.forEach(elem => {
     repo.splice(repo.indexOf(elem), 1);

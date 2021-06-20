@@ -6,7 +6,7 @@ dotenv.config({
 });
 
 const { PORT, NODE_ENV, MONGO_CONNECTION_STRING, JWT_SECRET_KEY } = process.env;
-const AUTH_MODE = process.env['AUTH_MODE'] === 'true';
+const AUTH_MODE = process.env["AUTH_MODE"] === 'true';
 
 const LOG_DIR = 'logs';
 const REQ_LOG = `${LOG_DIR}/log_info.txt`;

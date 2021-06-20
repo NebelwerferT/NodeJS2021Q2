@@ -27,8 +27,11 @@ export interface IBoard {
  */
 class Board implements IBoard {
   id: string;
+
   title: string;
+
   columns: Column[];
+
 /**
  * @type {Board}
  * @param {Object} boardProps an object containing board properties
@@ -44,7 +47,7 @@ class Board implements IBoard {
     this.id = id;
     this.title = title;
     this.columns = columns
-    };
+    }
   }
 
 

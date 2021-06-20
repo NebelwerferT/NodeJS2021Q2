@@ -27,9 +27,13 @@ export interface IUser {
 class User implements IUser {
 
   id: string;
+
   name: string;
+
   login: string;
+
   password: string;
+
   /**
    * @type {User}
    * @param {Object} userProps an object containing board properties

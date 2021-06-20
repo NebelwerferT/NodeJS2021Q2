@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
-import * as boardsService from './board.service';
+import { Router, NextFunction, Request, Response } from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
+import * as boardsService from './board.service';
 import { LogErr } from '../../middleware/interfaces';
 
-const router = require('express').Router();
+const router = Router();
 
 router.route('/')
   .get(async (_req: Request, res: Response) => {

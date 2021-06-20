@@ -1,10 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
-import * as tasksService from './task.service';
+import { Router, NextFunction, Request, Response } from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
+import * as tasksService from './task.service';
 import { LogErr } from '../../middleware/interfaces'
 
-const router = require('express').Router();
-
+const router = Router();
 
 router.route('/:boardId/tasks/')
   .get(async (req: Request, res: Response, next: NextFunction) => {
