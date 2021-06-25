@@ -1,5 +1,5 @@
-import { Board } from "../../entities/board.model";
 import { getRepository } from 'typeorm';
+import { Board } from "../../entities/board.model";
 
 /**
  * @module boardRepo
@@ -21,7 +21,7 @@ const getAll = async (): Promise<Board[]> => {
  */
 const getById = async (id: string): Promise<Board | undefined> => {
   const repo = getRepository(Board);
-  return await repo.findOne({ where: { id: id } });
+  return await repo.findOne({ where: { id } });
 }
 
 /**
@@ -58,7 +58,7 @@ const updateById = async (reqBody: Board): Promise<Board | undefined> => {
  */
 const deleteById = async (id: string): Promise<Board | undefined> => {
   const repo = getRepository(Board);
-  const deletedBoard = await repo.findOne({ where: { id: id } });
+  const deletedBoard = await repo.findOne({ where: { id } });
   if (deletedBoard !== undefined) {
     await repo.delete(id)
   }

@@ -1,5 +1,5 @@
-import { Task } from '../../entities/task.model';
 import { getRepository } from 'typeorm';
+import { Task } from '../../entities/task.model';
 
 /**
  * @module taskRepo
@@ -12,7 +12,7 @@ import { getRepository } from 'typeorm';
  */
 const getAll = async (boardId: string): Promise<Task[]> => {
   const repo = getRepository(Task);
-  return await repo.find({ where: { boardId: boardId } });
+  return await repo.find({ where: { boardId } });
 }
 
 /**
@@ -22,7 +22,7 @@ const getAll = async (boardId: string): Promise<Task[]> => {
  */
 const getById = async (id: string): Promise<Task | undefined> => {
   const repo = getRepository(Task);
-  return await repo.findOne({ where: { id: id } });
+  return await repo.findOne({ where: { id } });
 }
 
 /**
@@ -57,7 +57,7 @@ const updateById = async (reqBody: Task): Promise<Task | undefined> => {
  */
 const deleteById = async (id: string): Promise<Task | undefined> => {
   const repo = getRepository(Task);
-  const deletedTask = await repo.findOne({ where: { id: id } });
+  const deletedTask = await repo.findOne({ where: { id } });
   if (deletedTask !== undefined) {
     await repo.delete(id)
   }

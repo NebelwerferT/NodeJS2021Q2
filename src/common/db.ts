@@ -1,8 +1,8 @@
-import {getConnection, createConnection} from 'typeorm';
+import { getConnection, createConnection } from 'typeorm';
 
-import {config} from './ormconfig';
+import config from './ormconfig';
 
-const connectToDB = async() => {
+const connectToDB = async () => {
     let connection;
     try {
         connection = getConnection();
@@ -15,7 +15,8 @@ const connectToDB = async() => {
                 await connection.connect();
             }
         } else {
-            await createConnection(config);
+            const con = await createConnection(config);
+            await con.runMigrations();
             console.log('Successfully connected!');
         }
     } catch (err) {
@@ -23,7 +24,7 @@ const connectToDB = async() => {
     }
 }
 
-export const TryDBConnect = async(callback: ()=>void): Promise<void> => {
+export const TryDBConnect = async (callback: () => void): Promise<void> => {
     try {
         await connectToDB();
         callback();
