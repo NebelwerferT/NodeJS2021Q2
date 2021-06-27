@@ -11,7 +11,7 @@ services:
         ports:
             - ${PORT}:${PORT}
         environment:
-            DB_HOST: host.docker.internal
+            POSTGRES_HOST: host.docker.internal
             PORT: ${PORT}
         volumes:
             - ./dlogs:/usr/app/logs
