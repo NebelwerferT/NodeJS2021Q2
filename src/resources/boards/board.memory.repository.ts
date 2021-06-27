@@ -1,33 +1,38 @@
-import {Board, IBoard} from "./board.model";
+import { Board } from "../../entities/board.model";
+import { getRepository } from 'typeorm';
 
 /**
  * @module boardRepo
  */
 
-const repo: IBoard[] = [];
-
 /**
  * Gets all boards from the repository
  * @returns {Promise<Array<Board>>} a promise object representing an array of boards
  */
-const getAll = async (): Promise<IBoard[]> => repo;
+const getAll = async (): Promise<Board[]> => {
+  const repo = getRepository(Board);
+  return await repo.find();
+};
 
 /**
  * Gets a board by id from the repository
  * @param {string} id id of the requested board
  * @returns {Promise<Board>} a promise object representing a board
  */
-const getById = async (id: string): Promise<IBoard|undefined> => repo.find(board => board.id === id)
+const getById = async (id: string): Promise<Board | undefined> => {
+  const repo = getRepository(Board);
+  return await repo.findOne({ where: { id: id } });
+}
 
 /**
  * Creates a new board in the repository
  * @param {Object} reqBody an object with a board structure
  * @returns {Promise<Board>} a promise object representing a created board
  */
-const createBoard = async (reqBody: IBoard): Promise<IBoard> => {
-  const newBoard = new Board(reqBody);
-  repo.push(newBoard);
-  return newBoard;
+const createBoard = async (reqBody: Board): Promise<Board> => {
+  const repo = getRepository(Board);
+  const newBoard = repo.create(reqBody);
+  return await repo.save(newBoard);
 };
 
 
@@ -36,13 +41,14 @@ const createBoard = async (reqBody: IBoard): Promise<IBoard> => {
  * @param {Object} reqBody an object with a board structure
  * @returns {Promise<Board>} a promise object representing an updated board
  */
-const updateById = async (reqBody: IBoard): Promise<IBoard|undefined> => {
-  const updatedBoard = repo.find(board => board.id === reqBody.id);
+const updateById = async (reqBody: Board): Promise<Board | undefined> => {
+  const {id, columns, ...data} = reqBody;
+  const repo = getRepository(Board);
+  const updatedBoard = await repo.findOne(id);
   if (updatedBoard !== undefined) {
-    updatedBoard.title = reqBody.title;
-    updatedBoard.columns = reqBody.columns;
+    await repo.update(id, data);
   }
-  return updatedBoard;
+  return await repo.findOne(reqBody.id);
 };
 
 /**
@@ -50,10 +56,13 @@ const updateById = async (reqBody: IBoard): Promise<IBoard|undefined> => {
  * @param {string} id id of the board to remove
  * @returns {Promise<Board>} a promise object representing an deleted board
  */
-const deleteById =  async (id: string): Promise<IBoard|undefined> => {
-  const deletedBorder = repo.find(board => board.id === id);
-  if(deletedBorder !== undefined) {repo.splice(repo.indexOf(deletedBorder), 1);}
-  return deletedBorder;
+const deleteById = async (id: string): Promise<Board | undefined> => {
+  const repo = getRepository(Board);
+  const deletedBoard = await repo.findOne({ where: { id: id } });
+  if (deletedBoard !== undefined) {
+    await repo.delete(id)
+  }
+  return deletedBoard;
 };
 
 export { getAll, getById, createBoard, updateById, deleteById };

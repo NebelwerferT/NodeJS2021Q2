@@ -1,6 +1,6 @@
 import { Router, Response, Request, NextFunction } from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
-import { User } from './user.model';
+import { User } from '../../entities/user.model';
 import * as usersService from './user.service';
 import { LogErr } from '../../middleware/interfaces';
 

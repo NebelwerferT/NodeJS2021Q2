@@ -1,11 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export interface IUser {
-  id: string;
-  name: string;
-  login: string;
-  password: string;
-}
 /**
  * @module userModel
  */
@@ -24,14 +18,18 @@ export interface IUser {
 /**
  * Class to create a User object
  */
-class User implements IUser {
-
+@Entity({ name: 'user' })
+export class User {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar', length: 64 })
   name: string;
 
+  @Column({ type: 'varchar', length: 64 })
   login: string;
 
+  @Column({ type: 'varchar', length: 64 })
   password: string;
 
   /**
@@ -42,27 +40,14 @@ class User implements IUser {
    * @param {string} userProps.login user login
    * @param {string} userProps.password user password
    */
-  constructor({
-    id = uuidv4(),
-    name = 'USER',
-    login = 'user',
-    password = 'P@55w0rd'
-  }: IUser) {
-    this.id = id;
-    this.name = name;
-    this.login = login;
-    this.password = password;
-  }
 
   /**
    * Creates a copy of the user object, but without the password field
    * @param {User} user user object
    * @returns {{id, name, login, string}} user object without password field
    */
-  static toResponse(user: IUser): { id: string, name: string, login: string } {
+  static toResponse(user: User): { id: string, name: string, login: string } {
     const { id, name, login } = user;
     return { id, name, login };
   }
 }
-
-export {User};
