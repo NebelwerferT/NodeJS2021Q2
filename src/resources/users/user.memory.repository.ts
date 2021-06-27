@@ -1,5 +1,5 @@
-import { User } from '../../entities/user.model';
 import { getRepository } from 'typeorm';
+import { User } from '../../entities/user.model';
 
 /**
  * @module userRepo
@@ -21,7 +21,7 @@ const getAll = async (): Promise<User[]> => {
  */
 const getById = async (id: string): Promise<User | undefined> => {
   const repo = getRepository(User);
-  return await repo.findOne({ where: { id: id } });
+  return await repo.findOne({ where: { id } });
 }
 
 /**
@@ -44,7 +44,7 @@ const updateById = async (id: string, name: string): Promise<User | undefined> =
   const repo = getRepository(User);
   const updatedUser = await repo.findOne(id);
   if (updatedUser !== undefined) {
-    await repo.update(id, {name: name})
+    await repo.update(id, {name})
   }
   return await repo.findOne(id);
 };
@@ -56,7 +56,7 @@ const updateById = async (id: string, name: string): Promise<User | undefined> =
  */
 const deleteById = async (id: string): Promise<User | undefined> => {
   const repo = getRepository(User);
-  const deletedUser = await repo.findOne({ where: { id: id } });
+  const deletedUser = await repo.findOne({ where: { id } });
   if (deletedUser !== undefined) {
     await repo.delete(id);
   }
