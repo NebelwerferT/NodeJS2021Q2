@@ -1,4 +1,5 @@
 import { getConnection, createConnection } from 'typeorm';
+import { adminIfNotExist } from './adminExist';
 
 import config from './ormconfig';
 
@@ -17,6 +18,7 @@ const connectToDB = async () => {
         } else {
             const con = await createConnection(config);
             await con.runMigrations();
+            await adminIfNotExist();
             console.log('Successfully connected!');
         }
     } catch (err) {
